@@ -1,18 +1,17 @@
-// ===== CONFIGURACIÓN AUTH0 =====
+// Configuracion auth0
 let auth0Client;
 
 const AUTH0_DOMAIN = 'dev-83188n4078805pqv.us.auth0.com';
 const AUTH0_CLIENT_ID = 'Pz0yMHkGxv7FC1haWRlTLonCzZIFA0wD';
-
-// ===== PRODUCTOS =====
+// Productos
 const productos = {
   camisetas: [
-    { id: 1, nombre: 'Camiseta Running Pro', precio: 15990, img: 'https://placehold.co/200x140/4a90d9/white?text=Camiseta+Running', desc: 'Camiseta transpirable para running' },
-    { id: 2, nombre: 'Camiseta Training Fit', precio: 13990, img: 'https://placehold.co/200x140/4a90d9/white?text=Camiseta+Training', desc: 'Ajuste ergonómico para entrenamiento' },
-    { id: 3, nombre: 'Camiseta Gym Classic', precio: 11990, img: 'https://placehold.co/200x140/4a90d9/white?text=Camiseta+Gym', desc: 'Algodón suave, uso diario en gimnasio' }
+    { id: 1, nombre: 'Camiseta Running', precio: 15990, img: 'https://placehold.co/200x140/4a90d9/white?text=Camiseta+Running', desc: 'Camiseta transpirable para running' },
+    { id: 2, nombre: 'Camiseta Training', precio: 13990, img: 'https://placehold.co/200x140/4a90d9/white?text=Camiseta+Training', desc: 'Ajuste ergonómico para entrenamiento' },
+    { id: 3, nombre: 'Camiseta Gym', precio: 11990, img: 'https://placehold.co/200x140/4a90d9/white?text=Camiseta+Gym', desc: 'Algodón suave, uso diario en gimnasio' }
   ],
   pantalones: [
-    { id: 4, nombre: 'Pantalón Jogger Sport', precio: 22990, img: 'https://placehold.co/200x140/2d9d5f/white?text=Jogger+Sport', desc: 'Jogger deportivo con bolsillos' },
+    { id: 4, nombre: 'Pantalón Sport', precio: 22990, img: 'https://placehold.co/200x140/2d9d5f/white?text=Jogger+Sport', desc: 'Jogger deportivo con bolsillos' },
     { id: 5, nombre: 'Short Running', precio: 14990, img: 'https://placehold.co/200x140/2d9d5f/white?text=Short+Running', desc: 'Short liviano para correr' },
     { id: 6, nombre: 'Calza Deportiva', precio: 18990, img: 'https://placehold.co/200x140/2d9d5f/white?text=Calza+Deportiva', desc: 'Calza compresiva para entrenamiento' }
   ],
@@ -22,8 +21,7 @@ const productos = {
     { id: 9, nombre: 'Mochila Deportiva', precio: 24990, img: 'https://placehold.co/200x140/d9824a/white?text=Mochila', desc: 'Mochila resistente con compartimentos' }
   ]
 };
-
-// ===== INICIALIZAR AUTH0 =====
+// Iniciar auth0
 async function initAuth0() {
   auth0Client = await auth0.createAuth0Client({
     domain: AUTH0_DOMAIN,
@@ -71,8 +69,7 @@ document.getElementById('logout-btn').addEventListener('click', () => {
     logoutParams: { returnTo: window.location.origin }
   });
 });
-
-// ===== RENDERIZAR PRODUCTOS =====
+// Renderizar Productos
 function renderProductos() {
   Object.keys(productos).forEach(categoria => {
     const contenedor = document.getElementById(categoria);
@@ -91,8 +88,7 @@ function renderProductos() {
     });
   });
 }
-
-// ===== CARRITO (SESSION STORAGE) =====
+// Sesion Storage para carrito
 function getCarrito() {
   return JSON.parse(sessionStorage.getItem('carrito')) || [];
 }
@@ -138,8 +134,7 @@ function renderCarrito() {
 
   document.getElementById('cart-total').textContent = total.toLocaleString('es-CL');
 }
-
-// ===== CHECKOUT =====
+// Checkout
 document.getElementById('checkout-btn').addEventListener('click', () => {
   const carrito = getCarrito();
   if (carrito.length === 0) {
@@ -155,15 +150,13 @@ document.getElementById('payment-form').addEventListener('submit', (e) => {
 
   const correo = document.getElementById('correo').value;
   const telefono = document.getElementById('telefono').value;
-
-  // Validación correo
+// Validacion de correo (formato)
   const correoValido = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(correo);
   if (!correoValido) {
     alert('Por favor ingresa un correo electrónico válido (ej: nombre@gmail.com)');
     return;
   }
-
-  // Validación teléfono (solo números, entre 8 y 12 dígitos)
+// Validacion de telefono: solo numeros, entre 8 y 12 digitos
   const telefonoValido = /^[0-9]{8,12}$/.test(telefono);
   if (!telefonoValido) {
     alert('Por favor ingresa un teléfono válido (solo números, 8 a 12 dígitos)');
