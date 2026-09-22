@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>SportyStyle</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>SportyStyle</h1>
+  <div id="auth-section">
+    <button id="login-btn">Iniciar sesión</button>
+    <button id="logout-btn" style="display:none">Cerrar sesión</button>
+    <p id="welcome-msg"></p>
+  </div>
+</header>
+
+<main id="app-content" style="display:none">
+
+  <section id="catalog">
+    <h2>Camisetas Deportivas</h2>
+    <div class="products" id="camisetas"></div>
+
+    <h2>Pantalones Deportivos</h2>
+    <div class="products" id="pantalones"></div>
+
+    <h2>Accesorios de Deporte</h2>
+    <div class="products" id="accesorios"></div>
+  </section>
+
+  <section id="cart">
+    <h2>Carrito de Compras</h2>
+    <div id="cart-items"></div>
+    <p><strong>Total: $<span id="cart-total">0</span></strong></p>
+    <button id="checkout-btn">Proceder al pago</button>
+  </section>
+
+  <section id="checkout-form" style="display:none">
+    <h2>Datos de envío</h2>
+    <form id="payment-form">
+      <input type="text" id="nombre" placeholder="Nombre completo" required>
+      <input type="text" id="direccion" placeholder="Dirección de envío" required>
+      <input type="email" id="correo" placeholder="Correo electrónico" required>
+      <input type="text" id="telefono" placeholder="Teléfono" required>
+      <button type="submit">Confirmar pedido</button>
+    </form>
+  </section>
+
+  <section id="confirmation" style="display:none">
+    <h2>¡Gracias por tu compra!</h2>
+    <div id="order-summary"></div>
+  </section>
+
+</main>
+
+<p id="login-required-msg">Debes iniciar sesión para ver la tienda.</p>
+
+<script src="app.js"></script>
+</body>
+</html>
